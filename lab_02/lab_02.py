@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 
-img = cv2.imread(r'D:\Academy\fourth_year_2nd_semester\lab\image_processing\lap_codes\lap_02\hist2.tif',0)
+img = cv2.imread(r'lab_02/hist2.tif',0)
 
 #Initialize intensity values with 256 zeroes
 intensity_count = [0] * 256         
