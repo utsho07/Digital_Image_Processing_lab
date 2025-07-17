@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread(r'D:\Academy\fourth_year_2nd_semester\lab\image_processing\lap_codes\lab_12\inp3.tif')
+img = cv2.imread(r'D:\Academy\fourth_year_2nd_semester\lab\image_processing\lap_codes\lab_12\inp3.jpeg')
 
 kernel = np.ones((5,5),np.float32)/25
 dst = cv2.filter2D(img,-1,kernel)
