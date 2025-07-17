@@ -44,3 +44,5 @@ plt.hist(high_contrast.ravel(),256,[0,256])
 plt.xlabel('Intensity Values')
 plt.ylabel('Pixel Count')
 plt.show()
+
+#https://youtu.be/uqeOrtAzSyU?si=_sdZRPVoXikdaXvo
