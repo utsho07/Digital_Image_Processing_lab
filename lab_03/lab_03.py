@@ -1,3 +1,4 @@
+#To create an opencv-python program in order to convert a given RGB/grayscale image to a negative image.
 import cv2
 import numpy as np
 
