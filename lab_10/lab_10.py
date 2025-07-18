@@ -9,12 +9,14 @@ plt.figure(figsize=(12,12))
 im = cv2.imread(r"D:\Academy\fourth_year_2nd_semester\lab\image_processing\lap_codes\lab_10\inp1.jpg", 1)
 #function for sharpening filter
 def sharpenFiltering(img):
+    #making a copy of the image and converting it to float64 for precision
+    #copy.deepcopy is used to avoid modifying the original image
     inputImg = copy.deepcopy(img.astype(np.float64))
     #converting color scale from BGR to GRAY
     inputImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #initialize black image of size equal to given image
     outputImg = np.zeros(inputImg.shape)
-    #padding the image with zeros
+    #padding the image with zeros to avoid boundary issues during convolution
     inputImg = np.pad(inputImg, (1, 1), 'constant', constant_values=(0))
     #creating two filters for horizontal and vertical edge detection
     fh = np.array([[-1.0,-2.0,-1.0],[0.0,0.0,0.0],[1.0,2.0,1.0]])
