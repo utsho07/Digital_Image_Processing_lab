@@ -2,7 +2,7 @@
 import numpy as np
 import cv2
 
-img = cv2.imread(r'D:\Academy\fourth_year_2nd_semester\lab\image_processing\lap_codes\lab_11\Thumb.png',0)
+img = cv2.imread(r'D:\Academy\fourth_year_2nd_semester\lab\image_processing\practice\problem_11\Thumb.png',0)
 ret,img = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 
 # Function for skeletonizing the image

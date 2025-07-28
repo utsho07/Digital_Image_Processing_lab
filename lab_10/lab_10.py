@@ -1,58 +1,19 @@
-#  To create an opencv-python program to sharp a given RGB/grayscale image.
 import cv2
 import numpy as np
-from matplotlib import pyplot as plt
-import copy
 
-plt.figure(figsize=(12,12))
-#reading image file
-im = cv2.imread(r"D:\Academy\fourth_year_2nd_semester\lab\image_processing\lap_codes\lab_10\inp1.jpg", 1)
-#function for sharpening filter
-def sharpenFiltering(img):
-    #making a copy of the image and converting it to float64 for precision
-    #copy.deepcopy is used to avoid modifying the original image
-    inputImg = copy.deepcopy(img.astype(np.float64))
-    #converting color scale from BGR to GRAY
-    inputImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    #initialize black image of size equal to given image
-    outputImg = np.zeros(inputImg.shape)
-    #padding the image with zeros to avoid boundary issues during convolution
-    inputImg = np.pad(inputImg, (1, 1), 'constant', constant_values=(0))
-    #creating two filters for horizontal and vertical edge detection
-    fh = np.array([[-1.0,-2.0,-1.0],[0.0,0.0,0.0],[1.0,2.0,1.0]])
-    fy = np.array([[-1.0,0.0,1.0],[-2.0,0.0,2.0],[-1.0,0.0,1.0]])
-    #looping through image pixels
-    for row in range(1, inputImg.shape[0]-1):
-        for col in range(1, inputImg.shape[1]-1):
-            dx, dy = 0.0, 0.0
-            #convolving both filters
-            for x_filter in range(3):
-                for y_filter in range(3):
-                    dx += inputImg[row+x_filter-1][col+y_filter-1]*fh[x_filter][y_filter]
-                    dy += inputImg[row+x_filter-1][col+y_filter-1]*fy[x_filter][y_filter]
-            
-            #magnitude of gradient (instead of just adding dx and dy. we calculate magnitude)
-            pixel = np.sqrt(dx * dx + dy * dy)
-            outputImg[row-1][col-1] = pixel
-    #normalizing pixels
-    outputImg *= 255.0/np.max(outputImg)
-    return outputImg
+# Load image (color or grayscale)
+img = cv2.imread(r'D:\Academy\fourth_year_2nd_semester\lab\image_processing\practice\problem_10\inp1.jpg')
 
-#applying sharpen filters
-output = sharpenFiltering(im)
-#writing image to image file
-cv2.imwrite("sharpen.jpg",output)
-#converting color scale from BGR to RGB
-im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
-#plotting original image
-plt.subplot(211)
-plt.axis('off')
-plt.title("Original Image")
-plt.imshow(im)
-#plotting transformed image
-plt.subplot(212)
-plt.axis('off')
-plt.title("Transformed Image")
-plt.imshow(output, cmap="gray")
+# Define sharpening kernel
+kernel = np.array([[0, -1, 0],
+                   [-1, 5, -1],
+                   [0, -1, 0]])
+# Apply filter
+sharpened = cv2.filter2D(img, -1, kernel)
 
-plt.show()
+# Show and save
+cv2.imshow("Original", img)
+cv2.imshow("Sharpened", sharpened)
+cv2.imwrite("D:\Academic\Fourth year Second semester\4206\Code\exp10/sharpened_output.jpg", sharpened)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
